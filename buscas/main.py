@@ -1,4 +1,6 @@
-# Busca Binária
+#   PROGRAMAÇÃO DINÂMICA
+
+"""Tema: BUSCA BINÁRIA"""
 
 # Ter um algoritimo de busca eficiente = PRIMEIRO ordene o array (lista)
 
@@ -14,29 +16,34 @@
 # = 3,5
 # = INDEX 3
 
+"""===ORDENANDO LISTAS==="""
 
 lista1 = [ 5, 6 , 3 ,4 ,2]
 
 """Organiza a lista"""
 lista1.sort() # reverse=True para inverter a ordem
-print(lista1)
+print(lista1)       #[2, 3, 4, 5, 6]
 
 lista1.sort(reverse=True)
 
 """Sorted ordena a lista tendo a possibilidade de criar uma variável nova"""
 lista = [5, 2, 6, 5 ,6]
 listaOrdenada = sorted(lista)
-print(listaOrdenada)
+print(listaOrdenada)            # [2, 3, 4, 5, 6]
 
 listaOrdenadaRev = sorted(lista, reverse=True)
-print(listaOrdenadaRev)
+print(listaOrdenadaRev)     # [6, 6, 5, 5, 2]
 
-# parâmetro key = lambda
-
-lista = [("string", 2, 4), ("Kayque", 6, 2), ("Joao", 4), ("user", 1, 10)]
+"""Prâmetro key = lambda"""
+lista = [("string", 2, 4), ("Kayque", 6, 2), ("Joao", 4, 1), ("user", 1, 10)]
 listaOrdenada = sorted(lista, key=lambda X: X[-1]) # Utilizando uma variável X pelo indice "1"  para organizar a lista baseandosse nos números
-print(listaOrdenada)
+print(listaOrdenada) 
+#output = [('Kayque', 6, 2), ('string', 2, 4), ('Joao', 4), ('user', 1, 10)]
 # %%
+
+"""Ex: BUSCA BINÁRIA"""
+
+
 
 
 
