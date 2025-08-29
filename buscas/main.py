@@ -11,7 +11,7 @@
 
 # Pegando através do index
 # lista = [1, 2, 3, 4, 5, 6, 7, 8]
-# mid = left  + (low - left)/2
+# mid = left  + (low - left)/2    ou   meio = (inicio + fim) // 2
 # = 0+ (7-0)/2
 # = 3,5
 # = INDEX 3
@@ -42,9 +42,22 @@ print(listaOrdenada)
 # %%
 
 """Ex: BUSCA BINÁRIA"""
+def busca_binaria(lista, item):
+    inicio = 0
+    fim = len(lista) - 1
 
+    while inicio <= fim:
+        meio = (inicio + fim) // 2
+        meio_valor = lista[meio]
 
+        if meio_valor == item:
+            return meio  # Elemento encontrado, retorna o índice
+        elif item < meio_valor:
+            fim = meio - 1  # Busca na metade esquerda
+        else:
+            inicio = meio + 1  # Busca na metade direita
 
+    return "Elemento não encontrado", -1  # Elemento não encontrado
 
 
 # %%
@@ -57,4 +70,10 @@ for i in range(50):
     i = i + 1
     ordena.append(i)
 
-print(ordena)
+#print(ordena)
+
+busca_binaria(lista, 9)         # Output: ('Elemento não encontrado', -1)
+busca_binaria(ordena, 30)       # Output:  29...Isso porque temos uma lista ordenada 1 até 50
+
+
+# %%
