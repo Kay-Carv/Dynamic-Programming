@@ -121,6 +121,9 @@ def verificar_estoque(lista_sku, item):
 
 print(verificar_estoque(inventario_deposito, 1540))    #output: 3
 
+index = verificar_estoque(inventario_deposito, 1540)
+print(inventario_deposito[index])
+
 print(verificar_estoque(inventario_deposito, 5000))    #output: Nenhum protudo foi encontrado
 
 print(verificar_estoque(inventario_deposito, 1001))    #output: 0
@@ -129,3 +132,21 @@ print(verificar_estoque(inventario_deposito, 9999))    #output: 27
 
 print(len(inventario_deposito))    #output: 29
 # %%
+
+def busca_binaria_while(lista, alvo):
+    l, h =0, len(lista) -1
+    interacao = 0
+
+    while l <=h:
+        interacao += 1
+        m = (l + h) //2
+        print(f"Interação {interacao}: l={l}, h={h}, m={m}")
+
+        if lista[m] ==alvo:
+            return m
+        elif lista[m] < alvo:
+            l = m + 1
+        else:
+            h = m -1
+    return -1
+
