@@ -77,3 +77,55 @@ busca_binaria(ordena, 30)       # Output:  29...Isso porque temos uma lista orde
 
 
 # %%
+"""
+Você está trabalhando no sistema de um grande e-commerce. Uma das tarefas mais comuns é verificar rapidamente se um produto,
+ identificado por um código numérico único (SKU), está disponível no inventário do depósito.
+
+O inventário do depósito é uma lista gigante de códigos de produtos (SKUs), que já está ordenada numericamente.
+ Para otimizar o sistema e evitar lentidão, você não pode percorrer a lista item por item (busca linear), pois isso seria muito demorado com milhões de produtos.
+
+Sua tarefa é criar uma função chamada verificar_estoque(inventario, sku_produto) que receba a lista de SKUs do 
+inventário e o código do produto que você deseja encontrar.
+
+1.A função deve implementar o algoritmo de busca binária.
+2.Se o sku_produto for encontrado na lista inventario, a função deve retornar o índice (a posição) onde ele foi encontrado.
+3.Se o sku_produto não estiver no inventário, retorne uma mensagem
+"""
+
+
+# Lista de SKUs de produtos em estoque
+inventario_deposito = [
+    1001, 1005, 1540, 1203,  1877, 2010, 2345, 2890, 3012, 3050,
+    3110, 3115, 3498, 4040, 4567, 4899, 5001, 5023, 5555, 6789,
+    7123, 7543, 8008, 8134, 8888, 9010, 9123, 9999, 10000
+]
+
+def verificar_estoque(lista_sku, item):
+    lista_sku.sort()    # Ordena a lista
+    inicio = 0
+    fim = len(lista_sku)-1
+
+    while inicio <= fim:
+        meio = (inicio + fim) //2
+        meio_valor = lista_sku[meio]
+
+        if meio_valor == item:
+            return meio  # Elemento encontrado, retorna o índice
+        elif item < meio_valor:
+            fim = meio - 1  # Busca na metade esquerda
+        else:
+            inicio = meio + 1  # Busca na metade direita
+
+    return "Nenhum protudo foi encontrado"
+
+
+print(verificar_estoque(inventario_deposito, 1540))    #output: 3
+
+print(verificar_estoque(inventario_deposito, 5000))    #output: Nenhum protudo foi encontrado
+
+print(verificar_estoque(inventario_deposito, 1001))    #output: 0
+
+print(verificar_estoque(inventario_deposito, 9999))    #output: 27
+
+print(len(inventario_deposito))    #output: 29
+# %%
