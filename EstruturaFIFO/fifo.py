@@ -26,7 +26,10 @@ i = 0
 
 for i in range(len(fila)):
     cliente = fila.pop(0)
-    print(f"Cliente atendido {cliente}")
+    print(f"Cliente atendido {cliente}")        # Output
+                                                # Cliente atendido Cliente 1
+                                                # Cliente atendido Cliente 2
+                                                # Cliente atendido Cliente 3
     
 
 # %%
@@ -42,18 +45,20 @@ for i in range(len(fila)):
     
 lista_cliente = []
 
-for i in range(10):
+for i in range(3):
     cliente = input(f"Digite o nome do {i + 1}° para entrar na fila ")
     lista_cliente.append(cliente)
 
-for i in range(len(lista_cliente)):
+print("---Atendendo clientes---")
+while lista_cliente:                    # Acho que nesse casos é mais interessante usar while para esvaziar um fila
     proximoFila = lista_cliente.pop(0)
     print(f"Próximo cliente:  {proximoFila}")    
 
+print("Todos os clientes foram atendidos")
 # %%
 
     # """
-    #     Exempo 5 - Crie um programa que solicite três informações: Nome, idade e especialidade 10 vezes.
+    #     Exemplo 5 - Crie um programa que solicite três informações: Nome, idade e especialidade 10 vezes.
     #     Em seguida, crie uma estrutura para inserir o custo da consulta, em função da especialidade. Por fim, crie
     # um estrutura para retirar as informações dos clientes por ordem de prioridade.
     
@@ -67,40 +72,53 @@ for i in range(len(lista_cliente)):
    # """
     
 fila_consulta = []
-custo = []
 
 for i in range(2):
     print(f"\n--- {i + 1}º Cliente ---")
     nome = input(f"Digite o nome: ")
     idade = int(input("Idade: "))
-    epecialidade = int(input("Selecione a especialidade (1-4): "))
-    dados_cliente = [nome, idade, epecialidade]
+    print("1- Clinico geral\n2- Dermatologista\n3- Cardiologista\n4- Ortopedista")
+    especialidade = int(input("Selecione a especialidade (1-4): "))
+    dados_cliente = [nome, idade, especialidade]
     fila_consulta.append(dados_cliente)
     
 print(fila_consulta)
 
-for j in range(len(fila_consulta)):
-    match fila_consulta[j][2]:
+fila_atendimento = []
+for cliente in fila_consulta:
+    custo = 0
+    especialidade_nome = ""
+    match cliente[2]:
         case 1:
             custo = 500
-            epecialidade = "Clinico geral"
+            especialidade_nome = "Clinico geral"
         case 2:
             custo = 600
-            epecialidade = "Dermatologista"
+            especialidade_nome = "Dermatologista"
         case 3:
             custo = 800
-            especialidade = "Cardiologista"
+            especialidade_nome = "Cardiologista"
         case 4:
             custo = 550
-            especialidade = "Ortopedista"
+            especialidade_nome = "Ortopedista"
         case _:
             custo = 0
-            epecialidade = "Especialidade não encontrada"
+            especialidade_nome = "Especialidade não encontrada"
             
-    fila_consulta[j].extend([custo, especialidade])
+    fila_atendimento.append([cliente[0], cliente[1], especialidade_nome, custo])
 
-print(fila_consulta)
-    
+print("--- Fila a ser atendida ---\n")
+print(fila_atendimento)
+
+
+print("\n---Ordem de atendimento---")
+ordem_fila = 0
+while fila_atendimento:
+    cliente_atendido = fila_atendimento.pop(0)
+    print(f"{ordem_fila + 1}.\tCliente {cliente_atendido[0]}, Idade: {cliente_atendido[1]}, Especilidade: {cliente_atendido[2]}, Custo: R${cliente_atendido[3]:.2f} ")
+    ordem_fila += 1
+
+print("Todos os clientes da fila foram atendidos")
 # %%
 """Exercício feito pelo professor
 
@@ -109,7 +127,7 @@ print(fila_consulta)
 lista_clientes = {
     "nome" : [],
     "idade": [],
-    "epecialidade": [],
+    "especialidade": [],
     "custo": []
 }
 
@@ -141,10 +159,11 @@ i = 0
 while lista_clientes['nome']:
     nome = lista_clientes['nome'].pop(0)
     idade = lista_clientes['idade'].pop(0)
-    especialidade = lista_clientes['epecialidade'].pop(0)
+    especialidade = lista_clientes['especialidade'].pop(0)
     custo = lista_clientes['custo'].pop(0)
     
     print(f'{i + 1}.Nome: {nome} \nIdade:{idade} \nEspecialidade:{especialidade} \nR${custo}')
+    i += 1
 
 # %%
 
@@ -153,20 +172,20 @@ while lista_clientes['nome']:
 
 """
 
-lista_cliente = {
+lista_clientes = {
     "nome" : [],
     "idade": [],
-    "epecialidade": [],
+    "especialidade": [],
     "custo": []
 }
 
-calcular_custo = lambda custos: {
+calcular_custo = lambda custo: (
     500 if custo == "clinico geral" else
     600 if custo == "dermatologista" else
     800 if custo == "cardiologista" else
     550 if custo == "ortopedista" else
     0
-}
+)
 
 for i in range(3):
     print(f"---{i + 1}° cliente")
@@ -174,7 +193,7 @@ for i in range(3):
     idade = int(input("Digite a idade: "))
     especialidade = input("Digite especialidade: ").lower()
     
-    custo = calcular_custo(epecialidade)    # custo depende da especialidade
+    custo = calcular_custo(especialidade)    # custo depende da especialidade
 
     lista_clientes['nome'].append(nome)
     lista_clientes['idade'].append(idade)
@@ -182,6 +201,23 @@ for i in range(3):
     lista_clientes['custo'].append(custo)
     
 # Inclua a função para atender os clientes
+print(lista_clientes)                       # Output
+                                            # {'nome': ['Ana', 'Rafael', 'Beatriz'], 'idade': [19, 34, 45], 'especialidade': ['dermatologista', 'clinico geral', 'cardiologista'], 'custo': [600, 500, 800]}
+
+
+print("\n--- Atendendo a Fila ---")
+while lista_clientes['nome']:
+    nome = lista_clientes['nome'].pop(0)
+    idade = lista_clientes['idade'].pop(0)
+    especialidade = lista_clientes['especialidade'].pop(0)
+    custo = lista_clientes['custo'].pop(0)
+    
+    print(f"Atendendo: {nome} (Idade: {idade}) | Especialidade: {especialidade.capitalize()} | Custo: R${custo:.2f}")
+
+print("\nFila de atendimento finalizada.")  # Output
+                                            # Atendendo: Ana (Idade: 19) | Especialidade: Dermatologista | Custo: R$600.00
+                                            # Atendendo: Rafael (Idade: 34) | Especialidade: Clinico geral | Custo: R$500.00
+                                            # Atendendo: Beatriz (Idade: 45) | Especialidade: Cardiologista | Custo: R$800.00
 
 
 # %%
