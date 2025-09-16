@@ -221,3 +221,59 @@ print("\nFila de atendimento finalizada.")  # Output
 
 
 # %%
+
+"""Exercício 7: Sistema de Atendimento de Pedidos (FIFO)
+Desenvolva um sistema para um restaurante que gerencia a fila de pedidos. Os pedidos devem ser atendidos na ordem em que foram feitos.
+
+a) Crie um menu interativo com as seguintes opções:
+
+Adicionar um novo pedido
+
+Atender o próximo pedido
+
+Exibir a fila de pedidos
+
+Sair
+b) Use uma estrutura de dados de fila (lista) para armazenar os pedidos.
+c) Implemente a lógica para que, ao atender um pedido, o programa remova o primeiro item da fila. Certifique-se de que o sistema avise 
+quando a fila estiver vazia."""
+
+print("---Sistema de gerenciamento de fila de pedidos---")
+
+lista_pedidos = []
+qtd_pedido = 0
+
+while True:
+    print("\nSelecione uma opção (1 - 4)" \
+    "\n1 - Adicionar um novo pedido" \
+    "\n2 - Atender o próximo pedido" \
+    "\n3 - Exibir a fila de pedidos" \
+    "\n4 - Sair")
+
+    opcao = input("Escreva uma opção: ").lower()
+
+    if opcao == '1' or opcao == "adicionar um novo pedido":
+        pedido = input("Escreva o pedido")
+        lista_pedidos.append(pedido)
+        print(f"O pedido {pedido} foi adicionado! ")
+
+    elif opcao == "2" or opcao == "atender o próximo pedido":
+        if lista_pedidos:
+            pedido_atendido = lista_pedidos.pop(0)
+            qtd_pedido += 1
+            print(f"O {qtd_pedido}° pedido de ({pedido_atendido}) foi atendido!")
+        else:
+            print("Não temos pedidos")
+    
+    elif opcao == "3" or opcao == "exibir a fila de pedidos" :
+        print("---Lista de pedidos---")
+        for i, elemento in enumerate(lista_pedidos):
+            print(f"{1}. {elemento}")
+
+    elif opcao == "sair" or opcao == "4":
+        print(f"\nForam atendidos um total de {qtd_pedido} pedidos durante o expediente: ")
+        print("Encerrando o sistema")
+        break
+
+    else:
+        print("Opção inválida")

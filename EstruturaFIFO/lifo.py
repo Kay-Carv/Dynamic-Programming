@@ -192,3 +192,32 @@ while ordemPrioridade:
 
     if not ordemPrioridade:
         break
+
+# %%    
+"""Exercício 7: Gestão de Tarefas (LIFO)
+Crie um programa que simule uma lista de tarefas a serem realizadas por um funcionário. A regra é que a última tarefa adicionada à lista
+deve ser a primeira a ser concluída.
+
+a) Peça ao usuário para inserir o nome de 5 tarefas. Adicione-as a uma pilha (lista).
+b) Após adicionar as 5 tarefas, processe-as na ordem LIFO, exibindo uma mensagem a cada tarefa concluída.
+c) Ao final, exiba a mensagem "Todas as tarefas foram concluídas com sucesso!".
+"""
+lista_tarefas = []
+qtd_tarefas = 5
+
+print("---Lista de tarefas a serem feitas---")
+print(f"Olá funcionário, insira as suas {qtd_tarefas} que serão feitas")
+
+for i in range(qtd_tarefas):
+    nova_tarefa = input(f"Insira a {i + 1}° tarefa")
+    i += 1
+    lista_tarefas.append(nova_tarefa)
+
+print(lista_tarefas, "\n")
+
+while lista_tarefas:
+    tarefa_concluída = lista_tarefas.pop()
+    print(f"Executando a tarefa: {tarefa_concluída}")
+
+
+print("---Todas as tarefas foram concluídas com sucesso! ---")
