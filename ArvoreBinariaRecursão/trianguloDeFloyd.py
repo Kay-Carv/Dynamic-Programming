@@ -68,3 +68,35 @@ def triangulo_floyd(linhas):
         print(*linhas)
 
 triangulo_floyd(0)
+
+
+
+# Usando Memoização no processo, Foi usado outra lógica
+from functools import lru_cache
+
+print("\n\nUsando Memoização: \n")
+# Função que calcula o número na posição (i, j) usando fórmula matemática
+@lru_cache(maxsize=None)
+def floyd_number(i, j):
+    """
+    Retorna o número na posição (i, j) do Triângulo de Floyd.
+    A memoização garante que cálculos repetidos sejam armazenados em cache.
+    """
+    start = (i - 1) * i // 2 + 1
+    return start + (j - 1)
+
+
+def floyds_triangle(rows):
+    """
+    Imprime o Triângulo de Floyd até 'rows' linhas,
+    reutilizando resultados armazenados pela memoização.
+    """
+    for i in range(1, rows + 1):
+        for j in range(1, i + 1):
+            print(floyd_number(i, j), end=" ")
+        print()
+
+
+# Exemplo de uso
+rows = 4
+floyds_triangle(rows)
