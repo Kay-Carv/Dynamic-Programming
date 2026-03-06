@@ -1,0 +1,105 @@
+"""
+FIAP: Dynamic Programming - 06/03/2026
+Prof° Francisco
+
+
+Aula 4 - Top down e Bottom up
+
+São estruturas de baseadas em árvore binária
+Pensando no problema de Fibonacci
+
+
+Conceito de arvore top-down (de cima pra baixo)
+
+            6
+        3       3
+    1      2 1     2    
+1   1   1   1    1    1   
+
+Quero fib(5)
+    ->preciso de fib(4) + fib(3)
+        ->preciso de fib(3) + fib(2)
+            -->....
+
+Conceito de bottom-up (de baixo pra cima)
+
+Sei que fib(0)
+
+
+1      1     1   1     1   1
+    1     2   1     2    
+        3       3
+            6
+
+| Característica                | De cima para baixo (Top-down / Memoização)                | De baixo para cima (Bottom-up / Tabulação)                    |
+| :---                          | :---                                                      | :---                                                          |
+| **Estrutura**                 | Recursivo                                                 | Iterativo                                                     |
+| **Ponto de partida**          | Problema principal                                        | Casos base / Menores subproblemas                             |
+| **Armazenamento**             | Tabela de cache/pesquisa (preenchida sob demanda)         | Tabela (preenchida sistematicamente)                          |
+| **Subproblemas resolvidos**   | Apenas os necessários                                     | Todos os subproblemas                                         |
+| **Sobrecarga**                | Sobrecarga da pilha de chamadas recursivas                | Sobrecarga mínima (loops)                                     |
+| **Implementação**             | Pode ser mais intuitivo para problemas recursivos         | Requer uma ordenação cuidadosa das soluções dos subproblemas  |
+
+"""
+
+# %% TOP
+"""Lógica top-down"""
+
+import pandas as pd
+
+df = pd.DataFrame(
+    {'numero': [1,2,3,4,5]}
+)
+
+# Lógica top-down
+
+def  contar_topdown(n):
+    if n ==1 :
+        return 1
+    return 1 + contar_topdown(n-1)
+
+df['contar_topdown'] = df['numero'].apply(contar_topdown)
+df
+
+# %%
+"""Lógica bottom-up"""
+
+df = pd.DataFrame(
+    {'numero': [1,2,3,4,5]}
+)
+
+# Lógica bottom-up
+max_n = df['numero'].max()
+tabela = [0] * (max_n + 1)
+
+for i in range(2, max_n + 1):
+    tabela[i] = tabela[i-1] + 1
+
+df['contar_topdown'] = df['numero'].apply(lambda n: tabela[n])
+df
+
+# %%
+
+"""
+Lista de Exercícios:
+
+1. Criar um código utilizando a estrutura bottom-up e top-down para o
+problema de Fibonacci
+
+2. Criar um código utilizando a estrutura bottom-up e top-down para a
+somatória de até n
+
+3. Criar um código utilizando a estrutura bottom-up e top-down para o
+problema da escada (uma pessoa pode subir uma escada de n degraus). 
+Quantas maneiras existem para a pessoa subir os degraus?
+
+4. Criar um código utilizando a estrutura bottom-up e top-down para o problema da mochila (knapsack).
+ 
+item peso valor
+1     1    10
+2     2    15
+3     3    40
+ 
+Maximizar o valor sem ultrapassar o peso da mochila. Resolver utilizando top-down e bottom-up
+
+"""
